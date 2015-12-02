@@ -45,10 +45,7 @@ remove: {
         src: ['./src/javascripts/*'],
         dest: './dist/javascripts/main.js',
       },
-      dist: {
-        src: ['./src/javascripts/*'],
-        dest: './src/javascripts/main.js',
-      },
+
     },
     uglify: {
       my_target: {
@@ -61,7 +58,7 @@ remove: {
       target: {
         files: [{
           expand: true,
-          src: ['stylesheets/css/main.css'],
+          src: '././stylesheets/css/main.css',
           dest: './dist',
           ext: '.css'
         }]
@@ -112,6 +109,6 @@ remove: {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   // Default task.
-  grunt.registerTask('default', [ 'remove', 'concat', 'uglify', 'cssmin','htmlmin', 'copy','jshint']);
+  grunt.registerTask('default', [ 'remove', 'concat', 'uglify', 'cssmin','htmlmin', 'copy']);
 
 };
