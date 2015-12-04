@@ -6,11 +6,9 @@ module.exports = function(grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
 
-remove: {
-
-  fileList: ['./src/javascripts/main.js'],
-
-},
+    clean: {
+      js: ['./src/javascripts/main.js']
+    },
 
     jshint: {
       options: {
@@ -42,9 +40,13 @@ remove: {
     concat: {
 
       dist: {
-        src: ['./src/javascripts/*'],
-        dest: './dist/javascripts/main.js',
+        src: ['./src/javascripts/*.js'],
+        dest: './dist/javascripts/app/main.js',
       },
+      src: {
+        src: ['./src/javascripts/*.js'],
+        dest: './src/javascripts/app/main.js',
+      }
 
     },
     uglify: {
@@ -64,16 +66,7 @@ remove: {
         }]
       }
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      lib_test: {
-        files: '<%= jshint.lib_test.src %>',
-        tasks: ['jshint:lib_test', 'qunit']
-      }
-    },
+
     htmlmin: {                                     // Task
       dist: {                                      // Target
         options: {                                 // Target options
@@ -94,6 +87,16 @@ remove: {
 
         ]
       }
+    },
+    watch: {
+      scripts: {
+        files: ['./src/javascripts/*.js'],
+        tasks: ['clean','concat'],
+        options: {
+          spawn: true,
+          livereload: true
+        }
+      }
     }
   });
 
@@ -104,11 +107,12 @@ remove: {
   //grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   // Default task.
-  grunt.registerTask('default', [ 'remove', 'concat', 'uglify', 'cssmin','htmlmin', 'copy']);
+  grunt.registerTask('default', [ 'clean', 'concat', 'uglify', 'cssmin','htmlmin', 'copy', 'watch']);
 
 };
