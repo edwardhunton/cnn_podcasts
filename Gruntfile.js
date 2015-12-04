@@ -52,7 +52,7 @@ module.exports = function(grunt) {
     uglify: {
       my_target: {
         files: {
-          './dist/javascripts/main.js': ['././dist/javascripts/main.js']
+          './dist/javascripts/app/main.js': ['././dist/javascripts/app/main.js']
         }
       }
     },
@@ -60,8 +60,8 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          src: '././stylesheets/css/main.css',
-          dest: './dist',
+          src: './src/stylesheets/css/main.css',
+          dest: './dist/stylesheets',
           ext: '.css'
         }]
       }
